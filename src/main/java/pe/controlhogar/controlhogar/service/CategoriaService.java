@@ -43,7 +43,8 @@ public class CategoriaService {
     }
 
     public void eliminar(Long id) {
-        Categoria categoria = buscarPorId(id);
-        repository.delete(categoria);
+         Categoria categoria = buscarPorId(id);
+         categoria.setActivo(false);
+         repository.save(categoria);
     }
 }
