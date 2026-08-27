@@ -3,7 +3,7 @@
 -- Script 03: creación de la tabla movimiento
 -- =====================================================
 
-USE controlhogar;
+USE controlhogar_prueba;
 
 CREATE TABLE IF NOT EXISTS movimiento (
     id BIGINT NOT NULL AUTO_INCREMENT,
