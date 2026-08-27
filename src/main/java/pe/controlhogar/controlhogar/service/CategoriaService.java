@@ -30,10 +30,16 @@ public class CategoriaService {
     }
 
     public Categoria actualizar(Long id, Categoria datos) {
-        Categoria categoriaExistente = buscarPorId(id);
-        categoriaExistente.setNombre(datos.getNombre());
+    Categoria categoriaExistente = buscarPorId(id);
 
-        return repository.save(categoriaExistente);
+    categoriaExistente.setNombre(datos.getNombre());
+    categoriaExistente.setDescripcion(datos.getDescripcion());
+
+    if (datos.getActivo() != null) {
+        categoriaExistente.setActivo(datos.getActivo());
+    }
+
+    return repository.save(categoriaExistente);
     }
 
     public void eliminar(Long id) {

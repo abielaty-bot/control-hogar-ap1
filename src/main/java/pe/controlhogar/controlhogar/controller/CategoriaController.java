@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 import pe.controlhogar.controlhogar.entity.Categoria;
 import pe.controlhogar.controlhogar.service.CategoriaService;
 
@@ -28,18 +30,18 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> guardar(
-            @RequestBody Categoria categoria) {
+     public ResponseEntity<Categoria> guardar(
+        @Valid @RequestBody Categoria categoria) {
 
-        return ResponseEntity.ok(service.guardar(categoria));
+         return ResponseEntity.ok(service.guardar(categoria));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> actualizar(
-            @PathVariable Long id,
-            @RequestBody Categoria categoria) {
+      public ResponseEntity<Categoria> actualizar(
+        @PathVariable Long id,
+        @Valid @RequestBody Categoria categoria) {
 
-        return ResponseEntity.ok(service.actualizar(id, categoria));
+         return ResponseEntity.ok(service.actualizar(id, categoria));
     }
 
     @DeleteMapping("/{id}")
