@@ -15,7 +15,7 @@ public class CategoriaService {
     private CategoriaRepository repository;
 
     public List<Categoria> listar() {
-        return repository.findAll();
+        return repository.findByActivoTrueOrderByNombreAsc();
     }
 
     public Categoria guardar(Categoria categoria) {
@@ -30,21 +30,21 @@ public class CategoriaService {
     }
 
     public Categoria actualizar(Long id, Categoria datos) {
-    Categoria categoriaExistente = buscarPorId(id);
+        Categoria categoriaExistente = buscarPorId(id);
 
-    categoriaExistente.setNombre(datos.getNombre());
-    categoriaExistente.setDescripcion(datos.getDescripcion());
+        categoriaExistente.setNombre(datos.getNombre());
+        categoriaExistente.setDescripcion(datos.getDescripcion());
 
-    if (datos.getActivo() != null) {
-        categoriaExistente.setActivo(datos.getActivo());
-    }
+        if (datos.getActivo() != null) {
+            categoriaExistente.setActivo(datos.getActivo());
+        }
 
-    return repository.save(categoriaExistente);
+        return repository.save(categoriaExistente);
     }
 
     public void eliminar(Long id) {
-         Categoria categoria = buscarPorId(id);
-         categoria.setActivo(false);
-         repository.save(categoria);
+        Categoria categoria = buscarPorId(id);
+        categoria.setActivo(false);
+        repository.save(categoria);
     }
 }
