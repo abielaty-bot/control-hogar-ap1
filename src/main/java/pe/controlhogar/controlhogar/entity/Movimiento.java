@@ -2,6 +2,7 @@ package pe.controlhogar.controlhogar.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,6 +40,9 @@ public class Movimiento {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+    @Column(name = "eliminado_en")
+    private LocalDateTime eliminadoEn;
 
     public Movimiento() {
     }
@@ -81,5 +85,13 @@ public class Movimiento {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public LocalDateTime getEliminadoEn() {
+        return eliminadoEn;
+    }
+
+    public void setEliminadoEn(LocalDateTime eliminadoEn) {
+        this.eliminadoEn = eliminadoEn;
     }
 }

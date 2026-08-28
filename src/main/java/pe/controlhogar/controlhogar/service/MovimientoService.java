@@ -1,5 +1,6 @@
 package pe.controlhogar.controlhogar.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class MovimientoService {
     private MovimientoRepository repository;
 
     public List<Movimiento> listar() {
-        return repository.findAll();
+        return repository.findByEliminadoEnIsNullOrderByFechaDesc();
     }
 
     public Movimiento guardar(Movimiento movimiento) {
@@ -38,5 +39,11 @@ public class MovimientoService {
         movimientoExistente.setCategoria(datos.getCategoria());
 
         return repository.save(movimientoExistente);
+    }
+
+    public void eliminar(Long id) {
+        Movimiento movimiento = buscarPorId(id);
+        movimiento.setEliminadoEn(LocalDateTime.now());
+        repository.save(movimiento);
     }
 }
