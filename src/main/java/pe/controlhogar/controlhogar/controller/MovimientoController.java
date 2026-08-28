@@ -3,9 +3,12 @@ package pe.controlhogar.controlhogar.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,10 +30,27 @@ public class MovimientoController {
         return service.listar();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Movimiento> buscarPorId(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(service.buscarPorId(id));
+    }
+
     @PostMapping
-    public Movimiento guardar(
+    public ResponseEntity<Movimiento> guardar(
             @Valid @RequestBody Movimiento movimiento) {
 
-        return service.guardar(movimiento);
+        return ResponseEntity.ok(service.guardar(movimiento));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Movimiento> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody Movimiento movimiento) {
+
+        return ResponseEntity.ok(
+                service.actualizar(id, movimiento)
+        );
     }
 }
