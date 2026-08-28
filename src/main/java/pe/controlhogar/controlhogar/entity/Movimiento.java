@@ -1,7 +1,18 @@
 package pe.controlhogar.controlhogar.entity;
 
-import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "movimiento")
@@ -13,8 +24,16 @@ public class Movimiento {
 
     private String descripcion;
 
-    private Double monto;
+    @NotNull(message = "El monto es obligatorio")
+    @DecimalMin(
+            value = "0.01",
+            message = "El monto debe ser mayor que cero"
+    )
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal monto;
 
+    @NotNull(message = "La fecha es obligatoria")
+    @Column(nullable = false)
     private LocalDate fecha;
 
     @ManyToOne
@@ -40,11 +59,11 @@ public class Movimiento {
         this.descripcion = descripcion;
     }
 
-    public Double getMonto() {
+    public BigDecimal getMonto() {
         return monto;
     }
 
-    public void setMonto(Double monto) {
+    public void setMonto(BigDecimal monto) {
         this.monto = monto;
     }
 
